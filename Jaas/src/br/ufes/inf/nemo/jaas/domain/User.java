@@ -11,7 +11,6 @@ public class User extends PersistentObjectSupport {
 	
 	private static final long serialVersionUID = 1L;
 
-	
 	@NotNull 
 	private String username;
 	
