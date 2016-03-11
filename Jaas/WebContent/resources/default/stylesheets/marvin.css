@@ -1,0 +1,31 @@
+/* No border and background in forms: */
+.ui-widget-content {
+	border: none;
+	background-color: transparent;
+}
+
+/* Error messages displayed next to their fields. */
+.ui-message {
+	display: inline-block;
+}
+
+/* Growl messages positioned below Marvin's top bar. */
+.ui-growl {
+	top: 60px;
+}
+
+/* Ionicons buttons to the left when used in PrimeFaces buttons. */
+.ui-button .ui-button-text { display: inline-block; }
+.ui-button::before { margin: 0px -5px 0px 10px; }
+
+
+/* JButler styles. Should be moved to jbutler.css eventually. */
+@media screen and (min-width: 40em){
+	.jb-label {
+		float: right;
+	}
+}
+
+.jb-button {
+	float: right;
+}

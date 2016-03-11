@@ -1,0 +1,17 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+								xmlns:ui="http://java.sun.com/jsf/facelets"
+								xmlns:h="http://java.sun.com/jsf/html"
+								xmlns:f="http://java.sun.com/jsf/core"
+								xmlns:p="http://primefaces.org/ui">
+
+	<h:panelGroup id="#{fieldName}Label" styleClass="jb jb-label">
+		<ui:insert name="label" /><h:panelGroup styleClass="jb jb-star" rendered="#{(fieldName != null and facesContext.viewRoot.findComponent(formName).findComponent(fieldName).required)}">*</h:panelGroup>:
+	</h:panelGroup>
+	<h:panelGroup id="#{fieldName}Field" styleClass="jb jb-field">
+		<ui:insert />
+		<p:message for="#{fieldName}" rendered="#{fieldName != null}" />
+		<p:tooltip for="#{fieldName}" rendered="#{tooltip != null}" value="#{tooltip}" showEvent="focus" hideEvent="blur" />
+	</h:panelGroup>
+</ui:composition>
