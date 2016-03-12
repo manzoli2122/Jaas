@@ -22,7 +22,6 @@ public class ManageUsersServiceBean extends CrudServiceBean<User> implements Man
 
 	@Override
 	public void authorize() {
-		// TODO Auto-generated method stub
 		super.authorize();
 	}
 	
@@ -40,7 +39,6 @@ public class ManageUsersServiceBean extends CrudServiceBean<User> implements Man
 	protected User createNewEntity() {
 		return new User();
 	}
-	
 	
 	
 	@Override

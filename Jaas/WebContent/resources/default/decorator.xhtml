@@ -40,93 +40,7 @@
 				<!-- Navbar Right Menu -->
 				<div class="navbar-custom-menu">
 					<ul class="nav navbar-nav">
-						<!-- FIXME: hidden - Messages: style can be found in dropdown.less-->
-						<h:panelGroup rendered="false">
-						<li class="dropdown messages-menu">
-							<!-- Menu toggle button --> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-envelope-o"></i> <span
-								class="label label-success">4</span>
-						</a>
-							<ul class="dropdown-menu">
-								<li class="header">You have 4 messages</li>
-								<li>
-									<!-- inner menu: contains the messages -->
-									<ul class="menu">
-										<li>
-											<!-- start message --> <a href="#">
-												<div class="pull-left">
-													<!-- User Image -->
-													<img src="#{facesContext.externalContext.requestContextPath}/resources/default/stylesheets/AdminLTE-2.3.0/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
-												</div> <!-- Message title and timestamp -->
-												<h4>
-													Support Team <small><i class="fa fa-clock-o"></i> 5 mins</small>
-												</h4> <!-- The message -->
-												<p>Why not buy a new awesome theme?</p>
-										</a>
-										</li>
-										<!-- end message -->
-									</ul> <!-- /.menu -->
-								</li>
-								<li class="footer"><a href="#">See All Messages</a></li>
-							</ul>
-						</li>
-						</h:panelGroup>
-						<!-- /.messages-menu -->
-
-						<!-- FIXME: hidden - Notifications Menu -->
-						<h:panelGroup rendered="false">
-						<li class="dropdown notifications-menu">
-							<!-- Menu toggle button --> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-bell-o"></i> <span
-								class="label label-warning">10</span>
-						</a>
-							<ul class="dropdown-menu">
-								<li class="header">You have 10 notifications</li>
-								<li>
-									<!-- Inner Menu: contains the notifications -->
-									<ul class="menu">
-										<li>
-											<!-- start notification --> <a href="#"> <i class="fa fa-users text-aqua"></i> 5 new members joined today
-										</a>
-										</li>
-										<!-- end notification -->
-									</ul>
-								</li>
-								<li class="footer"><a href="#">View all</a></li>
-							</ul>
-						</li>
-						</h:panelGroup>
 						
-						<!-- FIXME: hidden - Tasks Menu -->
-						<h:panelGroup rendered="false">
-						<li class="dropdown tasks-menu">
-							<!-- Menu Toggle Button --> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-flag-o"></i> <span
-								class="label label-danger">9</span>
-						</a>
-							<ul class="dropdown-menu">
-								<li class="header">You have 9 tasks</li>
-								<li>
-									<!-- Inner menu: contains the tasks -->
-									<ul class="menu">
-										<li>
-											<!-- Task item --> <a href="#"> <!-- Task title and progress text -->
-												<h3>
-													Design some buttons <small class="pull-right">20%</small>
-												</h3> <!-- The progress bar -->
-												<div class="progress xs">
-													<!-- Change the css width attribute to simulate progress -->
-													<div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0"
-														aria-valuemax="100">
-														<span class="sr-only">20% Complete</span>
-													</div>
-												</div>
-										</a>
-										</li>
-										<!-- end task item -->
-									</ul>
-								</li>
-								<li class="footer"><a href="#">View all tasks</a></li>
-							</ul>
-						</li>
-						</h:panelGroup>
 						
 						<!-- FIXME: hidden - User Account Menu -->
 						<h:panelGroup rendered="#{sessionController.loggedIn}">
@@ -139,38 +53,24 @@
 								<!-- The user image in the menu -->
 								<li class="user-header"><img src="#{facesContext.externalContext.requestContextPath}/resources/default/images/blankAvatar.png" class="img-circle"
 									alt="User Image" />
-									<p><h:outputText value="#{sessionController.currentUser.name}" />
-										<small><h:outputFormat value="#{msgs['text.memberSince']}"><f:param value="#{sessionController.currentUser.creationDate}" /></h:outputFormat></small>
+									<p><h:outputText value="#{sessionController.currentUser.username}" />
 									</p></li>
-								<!-- Menu Body
-								<li class="user-body">
-									<div class="col-xs-4 text-center">
-										<a href="#">Followers</a>
-									</div>
-									<div class="col-xs-4 text-center">
-										<a href="#">Sales</a>
-									</div>
-									<div class="col-xs-4 text-center">
-										<a href="#">Friends</a>
-									</div>
-								</li> -->
+								
 								<!-- Menu Footer-->
 								<li class="user-footer">
 									<div class="pull-left">
-										<a href="javascript:alert('TODO: implement Edit Profile feature.')" class="btn btn-default btn-flat"><h:outputText value="#{msgs['menu.profile']}" /></a>
+										<p:commandLink styleClass="btn btn-info btn-flat"  action="#{sessionController.logout()}"  value="logout"  />
 									</div>
 									<div class="pull-right">
-										<a href="#{facesContext.externalContext.requestContextPath}/logout" class="btn btn-default btn-flat"><h:outputText value="#{msgs['menu.logout']}" /></a>
+										<p:commandLink styleClass="btn btn-info btn-flat"  action="#{sessionController.logout()}"  value="logout"  />
+					
 									</div>
 								</li>
 							</ul>
 						</li>
 						</h:panelGroup>
 						
-						<!-- FIXME: hidden - Control Sidebar Toggle Button -->
-						<h:panelGroup rendered="false">
-						<li><a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a></li>
-						</h:panelGroup>
+						
 
 						<!-- Ajax status indicator: -->
 						<h:form id="ajaxStatusForm">
@@ -210,33 +110,28 @@
 				</div>
 				</h:panelGroup>
 
-				<!-- FIXME: hidden - search form (Optional) -->
-				<h:panelGroup rendered="false">
-				<form action="#" method="get" class="sidebar-form">
-					<div class="input-group">
-						<input type="text" name="q" class="form-control" placeholder="Search..." /> <span class="input-group-btn">
-							<button type="submit" name="search" id="search-btn" class="btn btn-flat">
-								<i class="fa fa-search"></i>
-							</button>
-						</span>
-					</div>
-				</form>
-				</h:panelGroup>
-				<!-- /.search form -->
+				
 
 				<!-- Sidebar Menu -->
 				<h:form id="sidebarMenuForm">
 				<ul class="sidebar-menu">
-					<li class="header"><h:outputText value="#{msgs['title.menu']}" /></li>
-					<li><h:commandLink action="#{installSystemController.begin}" rendered="#{not coreInfo.systemInstalled}"><i class="fa fa-cogs"></i> <span><h:outputText value="#{msgsCore['core.menu.installSystem']}" /></span></h:commandLink></li>
-					<li><h:link outcome="/core/login/index" rendered="#{coreInfo.systemInstalled and not sessionController.loggedIn}"><i class="fa fa-key"></i> <span><h:outputText value="#{msgsCore['core.menu.login']}" /></span></h:link></li>
+					
+										
 					<li>
-						<p:commandLink  action="#{manageAcademicController.list()}" rendered="#{coreInfo.systemInstalled}" value="#{msgsCore['manageAcademic.title']}"  />
+						<p:link href="/login.faces" rendered="#{not sessionController.loggedIn}" ><i class="fa fa-home"></i> <h:outputText value="Login" /></p:link>
 					</li>
 					
 					<li>
-						<p:commandLink  action="#{manageUsersController.list()}"  value="Manage User"  />
+						<p:commandLink  action="#{manageUsersController.list()}" rendered="#{ sessionController.loggedIn}"  value="Cadastrar User"  />
 					</li>
+					<li>
+						<a href="#{facesContext.externalContext.requestContextPath}/admin/index.faces" ><h:outputText value="paginas somente para Admin" /></a>
+					</li>
+					<li>			
+        				<a href="#{facesContext.externalContext.requestContextPath}/usuario/index.faces"><h:outputText value="paginas somente para usuario" /></a>
+					</li>
+					
+					
 				</ul>
 				</h:form>
 				<!-- /.sidebar-menu -->
@@ -252,19 +147,12 @@
 					<ui:insert name="title" /> <small><ui:insert name="description" /></small>
 				</h1>
 				
-				<!-- FIXME: hidden -->
-				<h:panelGroup rendered="false">
-				<ol class="breadcrumb">
-					<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-					<li class="active">Here</li>
-				</ol>
-				</h:panelGroup>
 			</section>
 
 			<!-- Main content -->
 			<section class="content">
 				<!-- Global messages: -->
-				<h:form id="globalMessages" rendered="false">
+				<h:form id="globalMessages" >
 					<p:growl id="messages" globalOnly="true" showSummary="true" showDetail="true" sticky="true" />
 				</h:form>
 				

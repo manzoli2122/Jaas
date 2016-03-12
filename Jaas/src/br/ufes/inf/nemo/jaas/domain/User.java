@@ -24,6 +24,10 @@ public class User extends PersistentObjectSupport  implements Comparable<User>{
 	public String getUsername() {
 		return username;
 	}
+	
+	public String getName() {
+		return username;
+	}
 
 	public void setUsername(String username) {
 		this.username = username;
