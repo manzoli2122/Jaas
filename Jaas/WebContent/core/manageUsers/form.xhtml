@@ -35,6 +35,22 @@
 					</ui:decorate>
 				</h:panelGroup>
 				
+				
+				<h:panelGroup id="roleField" >
+					<ui:decorate template="/resources/sae/formfield.xhtml">
+						<ui:param name="fieldName" value="form:role" />
+						<ui:param name="label" value="role" />
+						<h:selectOneMenu  id="role" pt:class="form-control" value="#{manageUsersController.selectedEntity.role}" 
+						 				  required="true" disabled="#{manageUsersController.readOnly}">
+								<f:selectItem itemLabel="Selecione o role" itemValue="" />
+								<f:selectItems value="#{manageUsersController.roles}" var="type" itemLabel="#{type.label}" itemValue="#{type}" />
+								<p:ajax update="roleField" />
+						</h:selectOneMenu>	
+					</ui:decorate>
+				</h:panelGroup>	
+						
+						
+				
 				<h:panelGroup id="passwordField">
 					<ui:decorate template="/resources/sae/formfield.xhtml">
 						<ui:param name="fieldName" value="form:password" />
@@ -45,6 +61,7 @@
 						</p:password>
 					</ui:decorate>
 				</h:panelGroup>
+				
 					
 			
 				

@@ -12,7 +12,7 @@
 	</persistence-unit>
 	
 	
-	<persistence-unit name="saeLogin">
+	<persistence-unit name="jaasLogin">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>br.ufes.inf.nemo.util.ejb3.persistence.PersistentObjectSupport</class>
 		<class>br.ufes.inf.nemo.jaas.domain.User</class>

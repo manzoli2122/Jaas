@@ -5,6 +5,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 import br.ufes.inf.nemo.jaas.application.ManageUsersService;
+import br.ufes.inf.nemo.jaas.domain.Role;
 import br.ufes.inf.nemo.jaas.domain.User;
 import br.ufes.inf.nemo.util.ejb3.application.CrudService;
 import br.ufes.inf.nemo.util.ejb3.controller.CrudController;
@@ -25,6 +26,14 @@ public class ManageUsersController extends CrudController<User> {
 	    viewPath = "/core/manageUsers/";
 	    bundleName = "msgs";
 	}
+	
+	
+	
+	public Role[] getRoles() {
+		return Role.values();
+	}
+	
+	
 	
 	
 	@Override

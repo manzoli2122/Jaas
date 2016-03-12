@@ -14,15 +14,33 @@
     <url-pattern>*.faces</url-pattern>
   </servlet-mapping>
   
+  <error-page>
+    <error-code>403</error-code>
+    <location>/forbidden.html</location>
+  </error-page>
+  
   <security-constraint>
     <display-name>protegidas para admin</display-name>
     <web-resource-collection>
       <web-resource-name>logica de negocio</web-resource-name>
-      <url-pattern>/core/*</url-pattern>
+      <url-pattern>/admin/*</url-pattern>
     </web-resource-collection>
     <auth-constraint>
       <description>admin somente</description>
       <role-name>Admin</role-name>
+    </auth-constraint>
+  </security-constraint>
+  
+  
+  <security-constraint>
+    <display-name>protegidas para usuario</display-name>
+    <web-resource-collection>
+      <web-resource-name>logica de negocio</web-resource-name>
+      <url-pattern>/usuario/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <description>usuario somente</description>
+      <role-name>usuario</role-name>
     </auth-constraint>
   </security-constraint>
   

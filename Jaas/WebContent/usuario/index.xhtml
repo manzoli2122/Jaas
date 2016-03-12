@@ -7,18 +7,12 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="/resources/default/decorator.xhtml">
 
-    
+    <ui:define name="title"><h:outputText value="Home" /></ui:define>
+
     <ui:define name="body">
         <h1><h:outputText value="Bem vindo ao JAAS" /></h1>
 
-        
-        
-        <a href="#{facesContext.externalContext.requestContextPath}/admin/index.faces" class="btn btn-info btn-default btn-flat"><h:outputText value="paginas somente para Admin" /></a>
-									
-        <a href="#{facesContext.externalContext.requestContextPath}/usuario/index.faces" class="btn btn-danger btn-default btn-flat"><h:outputText value="paginas somente para usuario" /></a>
-			
-        
-        
-        
+        <h1>Somente usuario tem acesso</h1>
+        <p>este bloqueio foi feito atraves do web.xml</p>
     </ui:define>
 </ui:composition>

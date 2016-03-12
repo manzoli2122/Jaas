@@ -15,7 +15,7 @@ public class UserJPADAO extends BaseJPADAO<User> implements UserDAO {
 	private static final long serialVersionUID = 1L;
 
 	
-	@PersistenceContext
+	@PersistenceContext(unitName="Jaas")
 	private EntityManager entityManager;
 	
 	

@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 import br.ufes.inf.nemo.util.ejb3.persistence.PersistentObjectSupport;
 
 @Entity
-public class User extends PersistentObjectSupport {
+public class User extends PersistentObjectSupport  implements Comparable<User>{
 
 	
 	private static final long serialVersionUID = 1L;
@@ -43,5 +43,19 @@ public class User extends PersistentObjectSupport {
 
 	public void setRole(Role role) {
 		this.role = role;
-	}	
+	}
+	
+	
+	
+	@Override
+	public int compareTo(User o) {
+		if (username == null)	return 1;
+		if (o.username == null) return -1;
+		int cmp = username.compareTo(o.username);
+		if (cmp != 0 ) return cmp;
+		
+		return super.compareTo(o);	
+	}
+	
+	
 }

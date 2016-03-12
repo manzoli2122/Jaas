@@ -174,7 +174,7 @@ public class LoginService  implements LoginModule {
 	}
 
 	protected Group getRoleSets() throws LoginException {
-		logger.log(Level.INFO, "LOGIN  BUSCANDO ROLES");
+		logger.log(Level.INFO, "LOGIN  BUSCANDO ROLES = {0}", user.getRole().getLabel() );
 		SimpleGroup group = new SimpleGroup("Roles");
 		
 		group.addMember(new SimplePrincipal(user.getRole().getLabel()));

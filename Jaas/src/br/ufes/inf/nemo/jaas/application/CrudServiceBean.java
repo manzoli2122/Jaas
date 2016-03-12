@@ -4,9 +4,7 @@ package br.ufes.inf.nemo.jaas.application;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.PermitAll;
-import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import br.ufes.inf.nemo.util.ejb3.application.CrudException;
 import br.ufes.inf.nemo.util.ejb3.application.CrudOperation;
@@ -17,9 +15,7 @@ import br.ufes.inf.nemo.util.ejb3.persistence.PersistentObject;
 
 
 @Stateless
-//@DeclareRoles({"Admin", "egresso" , "guest"})
-//@RolesAllowed({"Admin" , "egresso"})
-//@PermitAll
+@PermitAll
 public abstract class CrudServiceBean<T extends PersistentObject>  implements CrudService<T>{
 
 	
