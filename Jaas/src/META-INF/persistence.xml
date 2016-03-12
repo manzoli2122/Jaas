@@ -10,4 +10,20 @@
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 		</properties>
 	</persistence-unit>
+	
+	
+	<persistence-unit name="saeLogin">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>br.ufes.inf.nemo.util.ejb3.persistence.PersistentObjectSupport</class>
+		<class>br.ufes.inf.nemo.jaas.domain.User</class>
+		
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jaas" />
+			<property name="javax.persistence.jdbc.user" value="jaas" />
+			<property name="javax.persistence.jdbc.password" value="jaas" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+		    <property name="hibernate.show_sql" value="true" />
+		</properties>
+	</persistence-unit>
 </persistence>

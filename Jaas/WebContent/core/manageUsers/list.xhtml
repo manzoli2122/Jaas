@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                template="/resources/default/decorator.xhtml">
+
+<ui:define name="title"><h:outputText value="#{msgs['manageUsers.title']}" /></ui:define>
+
+	
+<ui:define name="body">
+	<!-- The listing form. -->
+    <ui:decorate template="/resources/sae/form.xhtml">
+		<ui:param name="formName" value="#{msgs['manageUsers.title.box.list']}" />
+        <h:form id="filterForm" pt:class="form-horizontal">
+        	<h:panelGroup  id="filterBar" rendered="#{(not empty manageUsersController.filters)}">
+            	<div class="form-group">	
+	            	<div class="col-sm-3">
+	            		<h:selectOneMenu styleClass="form-control" value="#{manageUsersController.filterKey}" id="filter" required="true">
+	            			<f:selectItems value="#{manageUsersController.filters}" var="filter" itemLabel="#{filter.label}" 
+	            						   itemValue="#{filter.key}" />
+			                <f:ajax event="change" execute="@form" listener="#{manageUsersController.changeFilter}" 
+			                		render="@form :listingForm"  />
+	            		</h:selectOneMenu>
+	            	</div>
+	            	<div class="col-sm-4">
+	            		<h:selectOneMenu styleClass="form-control"  required="false" value="#{manageUsersController.filterParam}" 
+	            						 id="filterSelect" rendered="#{manageUsersController.filter.options != null}">
+		                	<f:selectItems value="#{manageUsersController.filter.reversedOptionsLabels}" />
+		                </h:selectOneMenu>
+					 	<p:inputText pt:class="form-control" placeholder="#{msgs['crud.filter.placeholder']}" id="filterText"  
+					 				 required="false" value="#{manageUsersController.filterParam}" 
+					 				 rendered="#{manageUsersController.filter.options == null}" />
+                	</div>
+                	<div class="col-sm-2">
+                		<a class="btn btn-block btn-info btn-social" jsf:process="@form" jsf:action="#{manageUsersController.filter}" 
+                		   jsf:update=":listingForm @form" >
+                		   <i class="fa fa-search"></i> <h:outputText value="#{msgs['crud.button.filter']}"/>
+                		</a>
+                	</div>
+					<div class="col-sm-3" jsf:rendered="#{manageUsersController.filtering}">
+						<a class="btn btn-block btn-danger btn-social" jsf:process="@form" 
+							jsf:action="#{manageUsersController.cancelFilter}" jsf:update=":listingForm @form">
+							<i class="fa fa-close"></i> <h:outputText value="#{msgs['crud.button.cancelFilter']}"/>
+						</a>
+                	</div>
+            	</div>
+			</h:panelGroup>
+		</h:form> 	
+            	
+            	
+            	
+            	
+       <h:form id="listingForm" style="margin-bottom: 25px">
+       		<p:dataTable 
+	   				 	widgetVar="listingTable"
+           			    rowIndexVar="rowIndex"
+               			tableStyleClass="table table-bordered table-striped"
+                  		value="#{manageUsersController.lazyEntities}" 
+                   		var="entity" 
+                   		rows="#{manageUsersController.maxDataTableRowsPerPage}" 
+                   		rowsPerPageTemplate="#{manageUsersController.halfMaxDataTableRowsPerPage},#{manageUsersController.maxDataTableRowsPerPage},#{manageUsersController.doubleMaxDataTableRowsPerPage}"
+                   		paginator="true" 
+                   		lazy="true" 
+                   		selection="#{manageUsersController.selectedEntity}" 
+                  		selectionMode="single" 
+                  		paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" 
+                  		paginatorPosition="bottom" 
+                  		loadingMessage="#{msgs['text.ajax.loading']}" 
+                   		emptyMessage="#{manageUsersController.filtering ? msgs['manageUsers.text.noEntitiesFiltered'] : msgs['manageUsers.text.noEntities']}">
+												
+      			<p:column headerText="#{msgs['crud.text.name']}"  style="text-align: center; width:60%;">
+           			<h:outputText value="#{entity.username}" />
+           		</p:column>
+           		
+           		
+           		<p:ajax event="rowSelect" update=":buttonsForm" />
+        	</p:dataTable>
+       	</h:form>
+        		
+        		
+        	<!-- Buttons shown below the listing. -->
+        <h:form id="buttonsForm">
+            <ui:decorate template="/resources/sae/formbutton.xhtml">
+	        	<div class="form-group">
+	        	<div class="row">	
+	            	<div class="col-sm-3" style="margin-bottom: 15px" >
+	        			<a class="btn btn-block btn-success btn-social" jsf:action="#{manageUsersController.create}">
+	        				<i class="fa fa-user-plus"></i> <h:outputText value="#{msgs['crud.button.create']}"/>
+	        			</a>
+	                </div>
+	                <div class="col-sm-3" style="margin-bottom: 15px" jsf:rendered="#{manageUsersController.selectedEntity != null}">
+	        			<a class="btn btn-block btn-info btn-social" jsf:action="#{manageUsersController.retrieve}" 
+	        				jsf:disabled="#{manageUsersController.selectedEntity == null}">
+	        				<i class="fa  fa-file-text"></i> <h:outputText value="#{msgs['crud.button.retrieve']}"/>
+	        			</a>
+	            	</div>
+	            	<div class="col-sm-3"  style="margin-bottom: 15px" jsf:rendered="#{manageUsersController.selectedEntity != null}">
+	        			<a class="btn btn-block btn-warning btn-social" jsf:action="#{manageUsersController.update}" 
+	        				jsf:disabled="#{manageUsersController.selectedEntity == null}"><i class="fa  fa-refresh">
+	        				</i> <h:outputText value="#{msgs['crud.button.update']}"/>
+	        			</a>
+	            	</div>
+	            	<div class="col-sm-3" jsf:rendered="#{manageUsersController.selectedEntity != null}">
+	        			<a class="btn btn-block btn-danger btn-social" jsf:action="#{manageUsersController.trash}" 
+	        				jsf:disabled="#{manageUsersController.selectedEntity == null}" jsf:process="@this" jsf:update=":trashForm">
+	        				<i class="fa  fa-trash-o"></i> <h:outputText value="#{msgs['crud.button.delete']}"/>
+	        			</a>
+	           		</div>
+	           	</div>
+	           	</div>
+	    	</ui:decorate>
+    	</h:form>
+	</ui:decorate> <!-- DEFINE FORM. -->
+        
+        
+       
+        <!-- The trash panel: shows entities that have been selected for deletion. -->
+	<h:panelGroup id="teste" rendered="#{not empty manageUsersController.trashCan}" >
+        <ui:decorate template="/resources/sae/formDanger.xhtml"  >
+			<ui:param name="formName" value="#{msgs['manageUsers.title.box.trash']}" />
+            <h:form id="trashForm" >
+	            <h3><h:outputText  value="#{msgs['crud.text.trashHeader']}" /></h3>
+	            <p:dataList value="#{manageUsersController.trashCan}" var="entity" type="ordered">
+	            	#{entity.username} 
+	            </p:dataList>
+                <ui:decorate template="/resources/sae/formbutton.xhtml">
+       				<div class="form-group">	
+           				<div class="col-sm-3" style="margin-bottom: 15px">
+           					<a class="btn btn-block btn-warning btn-social" jsf:action="#{manageUsersController.cancelDeletion}" 
+           						jsf:update=":trashForm :buttonsForm :listingForm"><i class="fa  fa-close">
+           						</i> <h:outputText value="#{msgs['crud.button.cancelDeletion']}"/>
+           					</a>
+           				</div>
+                        <div class="col-sm-3">
+	                       	<a class="btn btn-block btn-danger btn-social" jsf:action="#{manageUsersController.delete}" 
+	                       		jsf:update=":trashForm :buttonsForm :listingForm"><i class="fa  fa-trash-o">
+	                       		</i> <h:outputText value="#{msgs['crud.button.confirmDeletion']}"/>
+	                       	</a>
+           				</div>
+           			</div>
+           		</ui:decorate>
+         	</h:form>
+		</ui:decorate>
+	</h:panelGroup>
+		       
+        
+</ui:define> <!-- DEFINE BODY. -->
+</ui:composition>

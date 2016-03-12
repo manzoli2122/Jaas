@@ -16,6 +16,8 @@ public class ManageUsersServiceBean extends CrudServiceBean<User> implements Man
 	private static final long serialVersionUID = 1L;
 
 	
+	
+	
 	@EJB 
 	private UserDAO userDAO;
 	

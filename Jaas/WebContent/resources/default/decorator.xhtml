@@ -233,6 +233,10 @@
 					<li>
 						<p:commandLink  action="#{manageAcademicController.list()}" rendered="#{coreInfo.systemInstalled}" value="#{msgsCore['manageAcademic.title']}"  />
 					</li>
+					
+					<li>
+						<p:commandLink  action="#{manageUsersController.list()}"  value="Manage User"  />
+					</li>
 				</ul>
 				</h:form>
 				<!-- /.sidebar-menu -->
