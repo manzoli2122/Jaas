@@ -10,13 +10,13 @@ import br.ufes.inf.nemo.jaas.domain.User;
 import br.ufes.inf.nemo.jaas.persistence.UserDAO;
 import br.ufes.inf.nemo.util.ejb3.persistence.BaseDAO;
 
-//@DeclareRoles({"Admin", "usuario" })
-//@RolesAllowed({"Admin" })
 
+//@PermitAll
 
 
 @Stateless
-@PermitAll
+@DeclareRoles({"Admin", "usuario" })
+@RolesAllowed({"Admin" })
 public class ManageUsersServiceBean extends CrudServiceBean<User> implements ManageUsersService {
 
 	
@@ -31,8 +31,12 @@ public class ManageUsersServiceBean extends CrudServiceBean<User> implements Man
 	@EJB 
 	private UserDAO userDAO;
 	
+	
+	
+	
+	
+	
 	@Override
-	@PermitAll
 	public BaseDAO<User> getDAO() {
 		return userDAO;
 	}
@@ -55,6 +59,12 @@ public class ManageUsersServiceBean extends CrudServiceBean<User> implements Man
 		super.update(entity);
 	}
 
+	
+	@Override
+	public void delete(User entity) {
+		// TODO Auto-generated method stub
+		super.delete(entity);
+	}
 	
 
 }
