@@ -11,10 +11,14 @@
 	<ui:define name="title"><h:outputText value="#{msgs['title.login']}" /></ui:define>
 
 	<ui:define name="body">
-		
+			<h:panelGroup rendered="#{ sessionController.loggedIn}">
+			 
+			 <h:outputLabel style="text-align:center;" value="Usuario logado" />
+			
+			</h:panelGroup>
 
 			<!-- The login form. -->
-			
+			<h:panelGroup rendered="#{not sessionController.loggedIn}">
 			<ui:decorate template="/resources/sae/form.xhtml">
 			
 			
@@ -32,7 +36,7 @@
 				</form>
 			
 			</ui:decorate>
-			
+			</h:panelGroup>
 		
 	</ui:define>
 </ui:composition>

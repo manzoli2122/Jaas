@@ -32,6 +32,7 @@
   </security-constraint>
   
   
+  
   <security-constraint>
     <display-name>protegidas para usuario</display-name>
     <web-resource-collection>
@@ -44,7 +45,20 @@
     </auth-constraint>
   </security-constraint>
   
-
+  
+  <security-constraint>
+    <display-name>protegidas para usuario</display-name>
+    <web-resource-collection>
+      <web-resource-name>logica de negocio</web-resource-name>
+      <url-pattern>/login.faces</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <description>usuario somente</description>
+      <role-name>usuario</role-name>
+      <role-name>Admin</role-name>
+    </auth-constraint>
+  </security-constraint>
+  
   <login-config>
     <auth-method>FORM</auth-method>
     <realm-name>ApplicationRealm</realm-name>

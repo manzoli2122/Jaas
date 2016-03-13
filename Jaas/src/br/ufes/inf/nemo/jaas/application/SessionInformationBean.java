@@ -3,8 +3,6 @@ package br.ufes.inf.nemo.jaas.application;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.logging.Level;
-
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.SessionContext;

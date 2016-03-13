@@ -10,11 +10,13 @@ import br.ufes.inf.nemo.jaas.domain.User;
 import br.ufes.inf.nemo.jaas.persistence.UserDAO;
 import br.ufes.inf.nemo.util.ejb3.persistence.BaseDAO;
 
+//@DeclareRoles({"Admin", "usuario" })
+//@RolesAllowed({"Admin" })
+
 
 
 @Stateless
-@DeclareRoles({"Admin", "usuario" })
-@RolesAllowed({"Admin" })
+@PermitAll
 public class ManageUsersServiceBean extends CrudServiceBean<User> implements ManageUsersService {
 
 	
