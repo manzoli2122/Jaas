@@ -17,6 +17,7 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>br.ufes.inf.nemo.util.ejb3.persistence.PersistentObjectSupport</class>
 		<class>br.ufes.inf.nemo.jaas.domain.User</class>
+		<class>br.ufes.inf.nemo.jaas.domain.Institution</class>
 		
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jaas" />

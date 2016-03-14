@@ -2,9 +2,7 @@ package br.ufes.inf.nemo.jaas.application;
 
 import br.ufes.inf.nemo.jaas.domain.User;
 import br.ufes.inf.nemo.jaas.domain.User_;
-import br.ufes.inf.nemo.util.TextUtils;
 
-import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
 import java.security.acl.Group;
 import java.util.Map;
@@ -55,30 +53,24 @@ public class LoginService  implements LoginModule {
 	@Override
 	public void initialize(Subject subject, CallbackHandler callbackHandler,
 			Map<String, ?> sharedState, Map<String, ?> options) {
-		logger.log(Level.INFO, "LOGIN  INITIALIZE INIT");
 		this.subject = subject;
 	    this.callbackHandler = callbackHandler;
 	    this.sharedState = sharedState;
 	    this.options = options;	 
-	    logger.log(Level.INFO, "LOGIN  INITIALIZE OK");
 	}
 
 	@Override
 	public boolean login() throws LoginException {
 		loginOk = false;
 	    getUsernameAndPassword(); 
-	    logger.log(Level.INFO, "LOGIN  LOGIN - GETUSERNAME E PASSWORD OK");
 	    getUser1();
-	    logger.log(Level.INFO, "LOGIN  LOGIN - GETUSER OK");
 	    validateUser(); 
-	    logger.log(Level.INFO, "LOGIN  LOGIN - VALIDATE USER OK");
 	    loginOk = true;
 	    return true;
 	}
 
 	@Override
 	public boolean commit() throws LoginException {
-		logger.log(Level.INFO, "LOGIN  COMMIT - INIT");
 		if( loginOk == false )return false;
 		Group callerGroup ;
 	    callerGroup = new SimpleGroup("CallerPrincipal");
@@ -86,8 +78,7 @@ public class LoginService  implements LoginModule {
 		Set<Principal> principals = subject.getPrincipals();
 	    principals.add(identity);  
 	    principals.add(getRoleSets());
-	    principals.add(callerGroup);
-	    
+	    principals.add(callerGroup); 
 	    logger.log(Level.INFO, "LOGIN  COMMIT - OK");
 	    return true;
 	}
@@ -103,8 +94,7 @@ public class LoginService  implements LoginModule {
 
 	@Override
 	public boolean logout() throws LoginException {
-		logger.log(Level.INFO, "LOGIN  LOGOUT- INIT ");
-	    Set<Principal> principals = subject.getPrincipals();
+		Set<Principal> principals = subject.getPrincipals();
 	    principals.remove(identity);
 	    principals.clear();
 	    if(principals.isEmpty())
@@ -145,15 +135,7 @@ public class LoginService  implements LoginModule {
 		CriteriaQuery<User> cq = cb.createQuery(User.class);
 		Root<User> root = cq.from(User.class);
 		cq.where(  cb.equal(root.get(User_.username), identity.getName()));
-		try{
-			user = em.createQuery(cq).getSingleResult();
-			logger.log(Level.INFO, "USUARIO CADASTRADO COMO ADMINISTRADOR)");
-		}
-		catch (Exception e) {
-			
-			logger.log(Level.INFO, "USUARIO NAO CADASTRADO COMO ADMINISTRADOR)");
-		}
-		
+		user = em.createQuery(cq).getSingleResult();
 		tx.commit();
 		em.close();
 		emf.close();
@@ -161,49 +143,25 @@ public class LoginService  implements LoginModule {
 	}
 	
 	
-	
-	
-	
-	
-	
-	protected void getUser() throws LoginException {
-		logger.log(Level.INFO, "LOGIN SQL IDENTY = {0}",identity.getName());
-		
-		getUser1();
-	
-	}
 
 	protected Group getRoleSets() throws LoginException {
-		logger.log(Level.INFO, "LOGIN  BUSCANDO ROLES = {0}", user.getRole().getLabel() );
 		SimpleGroup group = new SimpleGroup("Roles");
-		
 		group.addMember(new SimplePrincipal(user.getRole().getLabel()));
-		
         return group ;
 	}
 	
+	
 	protected void validateUser( ) throws LoginException {
-		logger.log(Level.INFO, "LOGIN VALIDATE");
-		try {
-			
-			String password = new String(credential);
-			String md5password = TextUtils.produceMd5Hash(password);
-			
-			if(user!=null){
-				if( password == null || !password.equals(user.getPassword()) ){
-		            throw new LoginException(); 
-				}
-				else{
-					logger.log(Level.INFO, "ADMIN VALIDADO");
-					return;
-				}
+		String password = new String(credential);	
+		if(user!=null){
+			if( password == null || !password.equals(user.getPassword()) ){
+		           throw new LoginException(); 
 			}
-			
-			
-		} catch (NoSuchAlgorithmException e) {
-			throw new LoginException();
-		}
-               
+			else{
+				logger.log(Level.INFO, "ADMIN VALIDADO");
+				return;
+			}
+		}		     
     }
 	
 	

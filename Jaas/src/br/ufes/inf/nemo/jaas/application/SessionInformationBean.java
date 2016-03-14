@@ -47,7 +47,7 @@ public class SessionInformationBean implements SessionInformation {
 				try {
 					currentUser = userDAO.retrieveByName(principal.getName());
 				} catch (PersistentObjectNotFoundException | MultiplePersistentObjectsFoundException e) {
-					e.printStackTrace();
+					//e.printStackTrace();
 				}
 			}	
 		}
