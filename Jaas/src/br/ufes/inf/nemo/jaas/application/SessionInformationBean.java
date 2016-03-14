@@ -40,7 +40,7 @@ public class SessionInformationBean implements SessionInformation {
 	/** @see br.org.feees.sigme.core.application.SessionInformation#getCurrentUser() */
 	@Override
 	public User getCurrentUser() {
-		
+				
 		if(currentUser==null){
 			Principal principal = sessionC.getCallerPrincipal();
 			if(principal != null){
