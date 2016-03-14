@@ -26,9 +26,9 @@
 		<header class="main-header">
 
 			<!-- Logo -->
-			<a href="#{facesContext.externalContext.requestContextPath}/" class="logo"><span class="logo-mini">[<b>M</b>]</span>
-				<h:panelGroup rendered="#{coreInfo.systemInstalled}"><span class="logo-lg"><b>Marvin</b> @ <h:outputText value="#{coreInfo.currentConfig.institutionAcronym}" /></span></h:panelGroup>
-				<h:panelGroup rendered="#{not coreInfo.systemInstalled}"><span class="logo-lg"><b>Marvin</b></span></h:panelGroup>
+			<a href="#{facesContext.externalContext.requestContextPath}/" class="logo"><span class="logo-mini">[<b>J</b>]</span>
+				<h:panelGroup rendered="#{coreInfo.systemInstalled}"><span class="logo-lg"><b>Jaas</b> @ <h:outputText value="#{coreInfo.currentConfig.institutionAcronym}" /></span></h:panelGroup>
+				<h:panelGroup rendered="#{not coreInfo.systemInstalled}"><span class="logo-lg"><b>Jaas</b></span></h:panelGroup>
 			</a>
 
 			<!-- Header Navbar -->
@@ -46,8 +46,8 @@
 						<h:panelGroup rendered="#{sessionController.loggedIn}">
 						<li class="dropdown user user-menu">
 							<!-- Menu Toggle Button --> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <!-- The user image in the navbar--> <img
-								src="#{facesContext.externalContext.requestContextPath}/resources/default/images/blankAvatar.png" class="user-image" alt="User Image" /> <!-- hidden-xs hides the username on small devices so only the image appears. -->
-								<h:outputText value="#{sessionController.currentUser.name}" /><span class="hidden-xs"></span>
+								src="#{facesContext.externalContext.requestContextPath}/resources/default/images/blankAvatar.png" class="user-image" alt="User Image" /> 
+								<h:outputText value="#{sessionController.currentUser.name} - Perfil #{sessionController.currentUser.role.label}" /><span class="hidden-xs"></span>
 						</a>
 							<ul class="dropdown-menu">
 								<!-- The user image in the menu -->
@@ -58,9 +58,7 @@
 								
 								<!-- Menu Footer-->
 								<li class="user-footer">
-									<div class="pull-left">
-										<p:commandLink styleClass="btn btn-info btn-flat"  action="#{sessionController.logout()}"  value="logout"  />
-									</div>
+									
 									<div class="pull-right">
 										<p:commandLink styleClass="btn btn-info btn-flat"  action="#{sessionController.logout()}"  value="logout"  />
 					
@@ -96,20 +94,6 @@
 			<!-- sidebar: style can be found in sidebar.less -->
 			<section class="sidebar">
 
-				<!-- FIXME: hidden - Sidebar user panel (optional) -->
-				<h:panelGroup rendered="false">
-				<div class="user-panel">
-					<div class="pull-left image">
-						<img src="#{facesContext.externalContext.requestContextPath}/resources/default/stylesheets/AdminLTE-2.3.0/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
-					</div>
-					<div class="pull-left info">
-						<p>Alexander Pierce</p>
-						<!-- Status -->
-						<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-					</div>
-				</div>
-				</h:panelGroup>
-
 				
 
 				<!-- Sidebar Menu -->
@@ -124,6 +108,10 @@
 					<li>
 						<p:commandLink  action="#{manageUsersController.list()}"   value="Cadastrar User"  />
 					</li>
+					<li>
+						<p:commandLink rendered="#{sessionController.loggedIn}" action="#{manageInstitutionsController.list()}"   value="Cadastrar Institution"  />
+					</li>
+					
 					<li>
 						<a href="#{facesContext.externalContext.requestContextPath}/admin/index.faces" ><h:outputText value="paginas somente para Admin" /></a>
 					</li>

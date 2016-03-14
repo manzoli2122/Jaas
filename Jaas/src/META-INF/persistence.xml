@@ -5,6 +5,7 @@
 		<jta-data-source>java:jboss/datasources/Jaas</jta-data-source>
 		<class>br.ufes.inf.nemo.util.ejb3.persistence.PersistentObjectSupport</class>
 		<class>br.ufes.inf.nemo.jaas.domain.User</class>
+		<class>br.ufes.inf.nemo.jaas.domain.Institution</class>
 		
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="update" />

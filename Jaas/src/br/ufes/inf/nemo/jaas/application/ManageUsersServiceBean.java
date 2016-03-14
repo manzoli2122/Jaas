@@ -1,8 +1,6 @@
 package br.ufes.inf.nemo.jaas.application;
 
-import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.PermitAll;
-import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -11,28 +9,24 @@ import br.ufes.inf.nemo.jaas.persistence.UserDAO;
 import br.ufes.inf.nemo.util.ejb3.persistence.BaseDAO;
 
 
-//@PermitAll
-
-
+@PermitAll
 @Stateless
-@DeclareRoles({"Admin", "usuario" })
-@RolesAllowed({"Admin" })
 public class ManageUsersServiceBean extends CrudServiceBean<User> implements ManageUsersService {
 
 	
 	private static final long serialVersionUID = 1L;
 
-	@Override
-	public void authorize() {
-		super.authorize();
-	}
-	
 	
 	@EJB 
 	private UserDAO userDAO;
 	
 	
 	
+	@Override
+	public void authorize() {
+		super.authorize();
+	}
+
 	
 	
 	
